@@ -1,29 +1,39 @@
-源码安装git
+# git安装与配置
+
+## 1-源码安装git
 
 autotools curl zlib openssl expat libiconv
+```bash
+# fedora
 $ sudo dnf install dh-autoreconf curl-devel expat-devel gettext-devel \
 	openssl-devel perl-devel zlib-devel
 # (若无curl-devel则无法使用git clone https://xxx)
+# ubuntu
 $ sudo apt install dh-autoreconf libcurl4-gnutls-dev libexpat1-dev \
 	gettext libz-dev libssl-dev
-添加文档格式：(红帽系要开启EPEL)
+```
+添加文档格式：(红帽系要开启EPEL`yum install epel-release`)
+```bash
 $ sudo dnf install acsiidoc xmlto docbook2X
 $ sudo apt install asciidoc xmlto docbook2x
-Debian系要安装`$ sudo apt install install-info`
-Redhat系要安装`$ sudo dnf install getopt`,并要执行以下命令：
+```
+Debian系要 `$ sudo apt install install-info`.  
+Redhat系要 `$ sudo dnf install getopt` ,并要执行以下命令：
+```bash
 $ sudo ln -s /usr/bin/db2x_docbook2text /usr/bin/docbook2x-texi
-
+```
+正式安装
 ```bash
 $ tar -zxf git-2.22.0.tar.gz
 $ cd git-2.22.0
 $ make configure
+# 以下三步也可以直接configure, make, make install。
 $ ./configure --prefix=/usr
 $ make all doc info
 $ sudo make install install-doc install-html install-info
-
 ```
 
-初次运行前的配置
+## 2-配置变量位置
 
 Git配置变量存储于三个不同的位置：
 1. /etc/gitconfig 包含系统上每一个用户及他们仓库的通用配置。
@@ -36,32 +46,37 @@ Git配置变量存储于三个不同的位置：
 Git同样会查找MSys根目录, 即Git安装的根目录下的/etc/gitconfig。
 还有C:\ProgramData\Git\config。此文件只能通过管理员使用`git config -f `修改。
 
-可以通过以下命令查看所有的配置以及它们所在的文件：
+可以通过以下命令查看所有的配置以及它们所在的文件：  
+```bash
 $ git config --list --show-origin
-
+```
 
 安装Git之后，要做的第一件事就是设置用户名和邮件。因为每个提交都会使用这些信息。
+```bash
 $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
-按用户来的。
+```
+*注：* 按用户来的（/home/xxx）。  
 当你想针对特定项目使用不同的用户名和邮件时，在项目目录下运行没有`--global`选项
 的命令就可以了。
 
-使用不同的编辑器
-$ git config --global core.editor emacs
-
-
 可以通过 `$ git config <key>` 来检查Git的某一项配置
+```
 $ git config user.name
 John Doe
+```
 
-由于Git会从多个文件中读取统一配置变量的不同值，因此可能会看到意料之外的值。
-此时，可以查询Git中该变量的原始值，显示哪一个配置文件最后设置了该值。
+由于Git会从多个文件中读取统一配置变量的不同值，因此可能会看到意料之外的值。  
+此时，可以使用以下命令查询Git中该变量的原始值，显示哪一个配置文件最后设置了该值:
+```bash
 $ git config --show-origin rerere.autoUpdate
 file:/home/johndoe/.gitconfig false
+```
 
-获取帮助
+## 3-获取帮助
+
+```bash
 $ git help <verb>
 $ git <verb> --help   # -h显示简单帮助
 $ man git-<verb>
-
+```

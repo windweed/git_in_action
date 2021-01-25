@@ -8,11 +8,9 @@
 ```bash
 $ ssh-add -l
 ```
-如果输出
-```
-The agent has no identities.
-```
-则说明没有代理，有则可以通过`ssh-add -D`删除。
+如果输出  
+`The agent has no identities.`  
+则说明没有代理，有则可以通过 `$ ssh-add -D` 删除。
 
 然后依次将不同的ssh添加代理：
 ```bash

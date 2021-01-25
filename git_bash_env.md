@@ -2,10 +2,10 @@
 
 首先下载源码。  
 安装三连。  
-将 contrib/completion下的`git-completion.bash`和`git-prompt.sh`拷贝出来，此处以`~/git_scripts`为例。
+将 `contrib/completion`下的`git-completion.bash`和`git-prompt.sh`拷贝出来，此处以`~/git_scripts`为例。
 
 修改 ~/.bashrc:
-```.bashrc
+```bash
 # PS1
 source ~/git_scripts/git-completion.bash
 source ~/git_scripts/git-prompt.sh
